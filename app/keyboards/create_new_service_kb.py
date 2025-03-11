@@ -5,7 +5,8 @@ from app.keyboards.back_button_kb import create_back_button
 async def new_service_password_kb(length: int = 15, uppercase: bool = True,
                                   digits: bool = True, punctuation: bool = True) -> InlineKeyboardMarkup:
     """Создание клавиатуры на этапе пароля для создания нового сервиса"""
-    # new_serv__l15-u1-d1-p1
+    # new_service__l15-u1-d1-p1
+    # l - длина, u - 0/1 нужны ли заглавные буквы, d - 0/1 нужны ли цифры, p - 0/1 нужны ли пунктуационные символы
     upp, dig, pun = int(uppercase), int(digits), int(punctuation)  # превращаем в 0 или 1
     kb = InlineKeyboardMarkup(inline_keyboard=[
         [

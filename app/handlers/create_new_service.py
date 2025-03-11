@@ -58,7 +58,8 @@ async def get_new_service_name(msg_cbq: Message | CallbackQuery, state: FSMConte
 @router.callback_query(F.data == 'enter_your_password')
 async def enter_password(callback: CallbackQuery, state: FSMContext):
     """Запрашиваем пароль у пользователя, запуская машину состояния"""
-    await callback.message.edit_text('Введите свой пароль')
+    await callback.message.edit_text('Введите свой пароль',
+                                     reply_markup=await create_back_kb(f'new_service__l15-u1-d1-p1'))
     await state.set_state(NewService.password)
 
 
