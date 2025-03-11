@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.database.models import User
+from app.database.models import User, Password
 
 
 class Database:
@@ -25,6 +25,16 @@ class Database:
                 master_password=hashed_master_password
             )
             self.session.add(user)
+        await self.session.commit()
+
+    async def add_password(self, owner_id: int, name: str, hashed_password: str, comment: str = None):
+        password = Password(
+            service_name=name,
+            hashed_password=hashed_password,
+            comment=comment,
+            owner_id=owner_id
+        )
+        self.session.add(password)
         await self.session.commit()
 
     # async def add_bookmark(self, user_id: int):
