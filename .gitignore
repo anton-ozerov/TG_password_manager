@@ -1,0 +1,5 @@
+.env
+venv
+.idea
+database.sqlite3
+test.py
