@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app.database.requests import Database
-from app.handlers.commands import start_command
+from app.handlers.commands import start_command, main_menu
 from app.keyboards.master_password_kb import change_first_password
 from app.states.master_password_st import MasterPassword
 from app.utils.encryption_decryption_passwords import hash_password, check_password
@@ -46,8 +46,8 @@ async def again_get_master_password(message: Message, state: FSMContext, db: Dat
         username: str | None = message.from_user.username
         await db.add_user(id=message.from_user.id, username=username, hashed_master_password=hashed_master_password)
         await state.clear()
-        await start_command(message, db, text='Пароль успешно создан. Выберите нужную кнопку снизу')
+        msg = await main_menu(message, db, text='Пароль успешно создан. Выберите нужную кнопку снизу')
     else:
         await state.set_state(MasterPassword.again)
         msg = await message.answer('Пароли не совпадают. Попробуйте ещё раз', reply_markup=change_first_password)
-        return msg
+    return msg
